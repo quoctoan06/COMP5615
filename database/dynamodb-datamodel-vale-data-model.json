@@ -1,0 +1,272 @@
+{
+    "ModelName": "vale-data-model",
+    "ModelMetadata": {
+        "Author": "Quoc Toan Dang",
+        "DateCreated": "Aug 27, 2023, 04:18 AM",
+        "DateLastModified": "Aug 28, 2023, 09:24 PM",
+        "Description": "",
+        "AWSService": "Amazon DynamoDB",
+        "Version": "3.0"
+    },
+    "DataModel": [
+        {
+            "TableName": "Institution",
+            "KeyAttributes": {
+                "PartitionKey": {
+                    "AttributeName": "PK",
+                    "AttributeType": "S"
+                },
+                "SortKey": {
+                    "AttributeName": "SK",
+                    "AttributeType": "S"
+                }
+            },
+            "NonKeyAttributes": [
+                {
+                    "AttributeName": "Contact",
+                    "AttributeType": "M"
+                },
+                {
+                    "AttributeName": "Display",
+                    "AttributeType": "M"
+                },
+                {
+                    "AttributeName": "InstitutionName",
+                    "AttributeType": "S"
+                },
+                {
+                    "AttributeName": "Identity",
+                    "AttributeType": "M"
+                },
+                {
+                    "AttributeName": "Functionality",
+                    "AttributeType": "M"
+                }
+            ],
+            "TableFacets": [],
+            "GlobalSecondaryIndexes": [
+                {
+                    "IndexName": "ByInstitutionName",
+                    "KeyAttributes": {
+                        "PartitionKey": {
+                            "AttributeName": "InstitutionName",
+                            "AttributeType": "S"
+                        }
+                    },
+                    "Projection": {
+                        "ProjectionType": "ALL"
+                    }
+                }
+            ],
+            "TableData": [],
+            "DataAccess": {
+                "MySql": {}
+            },
+            "BillingMode": "PROVISIONED",
+            "ProvisionedCapacitySettings": {
+                "ProvisionedThroughput": {
+                    "ReadCapacityUnits": 5,
+                    "WriteCapacityUnits": 5
+                },
+                "AutoScalingRead": {
+                    "ScalableTargetRequest": {
+                        "MinCapacity": 1,
+                        "MaxCapacity": 10,
+                        "ServiceRole": "AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+                    },
+                    "ScalingPolicyConfiguration": {
+                        "TargetValue": 70
+                    }
+                },
+                "AutoScalingWrite": {
+                    "ScalableTargetRequest": {
+                        "MinCapacity": 1,
+                        "MaxCapacity": 10,
+                        "ServiceRole": "AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+                    },
+                    "ScalingPolicyConfiguration": {
+                        "TargetValue": 70
+                    }
+                }
+            }
+        },
+        {
+            "TableName": "AssetClass",
+            "KeyAttributes": {
+                "PartitionKey": {
+                    "AttributeName": "PK",
+                    "AttributeType": "S"
+                },
+                "SortKey": {
+                    "AttributeName": "SK",
+                    "AttributeType": "S"
+                }
+            },
+            "NonKeyAttributes": [
+                {
+                    "AttributeName": "Type",
+                    "AttributeType": "S"
+                },
+                {
+                    "AttributeName": "RequiredFields",
+                    "AttributeType": "L"
+                },
+                {
+                    "AttributeName": "OptionalFields",
+                    "AttributeType": "L"
+                }
+            ],
+            "TableFacets": [],
+            "GlobalSecondaryIndexes": [
+                {
+                    "IndexName": "ByType",
+                    "KeyAttributes": {
+                        "PartitionKey": {
+                            "AttributeName": "Type",
+                            "AttributeType": "S"
+                        }
+                    },
+                    "Projection": {
+                        "ProjectionType": "ALL"
+                    }
+                }
+            ],
+            "TableData": [],
+            "DataAccess": {
+                "MySql": {}
+            },
+            "BillingMode": "PROVISIONED",
+            "ProvisionedCapacitySettings": {
+                "ProvisionedThroughput": {
+                    "ReadCapacityUnits": 5,
+                    "WriteCapacityUnits": 5
+                },
+                "AutoScalingRead": {
+                    "ScalableTargetRequest": {
+                        "MinCapacity": 1,
+                        "MaxCapacity": 10,
+                        "ServiceRole": "AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+                    },
+                    "ScalingPolicyConfiguration": {
+                        "TargetValue": 70
+                    }
+                },
+                "AutoScalingWrite": {
+                    "ScalableTargetRequest": {
+                        "MinCapacity": 1,
+                        "MaxCapacity": 10,
+                        "ServiceRole": "AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+                    },
+                    "ScalingPolicyConfiguration": {
+                        "TargetValue": 70
+                    }
+                }
+            }
+        },
+        {
+            "TableName": "Asset",
+            "KeyAttributes": {
+                "PartitionKey": {
+                    "AttributeName": "PK",
+                    "AttributeType": "S"
+                },
+                "SortKey": {
+                    "AttributeName": "SK",
+                    "AttributeType": "S"
+                }
+            },
+            "NonKeyAttributes": [
+                {
+                    "AttributeName": "Type",
+                    "AttributeType": "S"
+                },
+                {
+                    "AttributeName": "Value",
+                    "AttributeType": "S"
+                },
+                {
+                    "AttributeName": "Team",
+                    "AttributeType": "S"
+                },
+                {
+                    "AttributeName": "MatterId",
+                    "AttributeType": "S"
+                },
+                {
+                    "AttributeName": "CreationDate",
+                    "AttributeType": "S"
+                },
+                {
+                    "AttributeName": "Owner",
+                    "AttributeType": "M"
+                },
+                {
+                    "AttributeName": "CustomFields",
+                    "AttributeType": "L"
+                }
+            ],
+            "TableFacets": [],
+            "GlobalSecondaryIndexes": [
+                {
+                    "IndexName": "ByMatterId",
+                    "KeyAttributes": {
+                        "PartitionKey": {
+                            "AttributeName": "MatterId",
+                            "AttributeType": "S"
+                        }
+                    },
+                    "Projection": {
+                        "ProjectionType": "ALL"
+                    }
+                },
+                {
+                    "IndexName": "ByTeamAndCreationDate",
+                    "KeyAttributes": {
+                        "PartitionKey": {
+                            "AttributeName": "Team",
+                            "AttributeType": "S"
+                        },
+                        "SortKey": {
+                            "AttributeName": "CreationDate",
+                            "AttributeType": "S"
+                        }
+                    },
+                    "Projection": {
+                        "ProjectionType": "ALL"
+                    }
+                }
+            ],
+            "TableData": [],
+            "DataAccess": {
+                "MySql": {}
+            },
+            "BillingMode": "PROVISIONED",
+            "ProvisionedCapacitySettings": {
+                "ProvisionedThroughput": {
+                    "ReadCapacityUnits": 5,
+                    "WriteCapacityUnits": 5
+                },
+                "AutoScalingRead": {
+                    "ScalableTargetRequest": {
+                        "MinCapacity": 1,
+                        "MaxCapacity": 10,
+                        "ServiceRole": "AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+                    },
+                    "ScalingPolicyConfiguration": {
+                        "TargetValue": 70
+                    }
+                },
+                "AutoScalingWrite": {
+                    "ScalableTargetRequest": {
+                        "MinCapacity": 1,
+                        "MaxCapacity": 10,
+                        "ServiceRole": "AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+                    },
+                    "ScalingPolicyConfiguration": {
+                        "TargetValue": 70
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+# dependencies
+/node_modules
+/venv
+/src/backend/__pycache__
+/src/backend/test/__pycache__
+node_modules
+/s3
+.DS_Store

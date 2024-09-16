@@ -1,0 +1,118 @@
+service: serverless-rest-api-with-dynamodb
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: python3.9
+  stage: dev
+  region: ap-southeast-2
+
+plugins:
+  - serverless-offline
+  - serverless-offline-ses-v2
+  - serverless-s3-local
+
+custom:
+  serverless-offline-ses-v2:
+    port: 8005
+  s3:
+    host: localhost
+    directory: ./s3
+    cors: ./src/backend/s3-cors.xml
+    allowMismatchedSignatures: true
+
+resources:
+  Resources:
+    UserDocuments:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: local-bucket
+        CorsConfiguration:
+          CorsRules:
+            - AllowedHeaders:
+                - '*'
+              AllowedMethods:
+                - PUT
+                - GET
+              AllowedOrigins:
+                - '*'
+              MaxAge: 3000
+
+functions:
+  getCommonInstitutions:
+    handler: src.backend.lambda_handler.getCommonInstitutions
+    name: get-common-institution
+    memorySize: 128
+    timeout: 5
+    events:
+      - http:
+          path: get-common-institution
+          method: GET
+          cors: true
+
+  searchInstitutions:
+    handler: src.backend.lambda_handler.searchInstitutions
+    name: search-institution
+    memorySize: 128
+    timeout: 5
+    events:
+      - http:
+          path: search-institution
+          method: GET
+          cors: true
+
+  getFieldsOfAssetClass:
+    handler: src.backend.lambda_handler.getFieldsOfAssetClass
+    name: get-fields-asset-class
+    memorySize: 128
+    timeout: 5
+    events:
+      - http:
+          path: get-fields-asset-class
+          method: GET
+          cors: true
+
+  getAssetClassList:
+    handler: src.backend.lambda_handler.getAssetClassList
+    name: get-asset-class-list
+    memorySize: 128
+    timeout: 5
+    events:
+      - http:
+          path: get-asset-class-list
+          method: GET
+          cors: true
+
+  createNewInstitution:
+    handler: src.backend.lambda_handler.createNewInstitution
+    name: create-new-institution
+    memorySize: 128
+    timeout: 5
+    events:
+      - http:
+          path: create-new-institution
+          method: POST
+          cors: true
+
+  generatePresignedUrl:
+    handler: src.backend.lambda_handler.generatePresignedUrl
+    name: generate-presigned-url
+    memorySize: 128
+    timeout: 5
+    events:
+      - http:
+          path: generate-presigned-url
+          method: POST
+          cors: true
+
+  saveAssetInputData:
+    handler: src.backend.lambda_handler.saveAssetInputData
+    name: save-asset-input-data
+    memorySize: 128
+    timeout: 5
+    events:
+      - http:
+          path: save-asset-input-data
+          method: POST
+          cors: true
